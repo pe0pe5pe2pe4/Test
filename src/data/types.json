@@ -1,0 +1,50 @@
+{
+  "_note": "仕様書 section 6『毒舌タイプ初期セット』。最初はこの5つで開始。制約: ディスの対象は架空のタイプのみ（実在の職業・企業はディスらない）／ MBTI等の公式名称は使わず独自タイプ名のみ。このJSONが単一ソースで、0002_seed_types.sql は generate-seed.mjs で生成する。",
+  "types": [
+    {
+      "code": "loud_sales",
+      "display_name": "声のデカさとノリだけで内定勝ち取った人",
+      "roast": "スペックより勢い。会議は元気だが議事録は白紙。飲みの席だけ評価がうなぎ登り。",
+      "love_followup": "でもその瞬発力、現場では最強。人を巻き込んで数字を動かせるのはあなただけ。",
+      "worst_match": "comm_disorder_tech",
+      "worst_match_line": "「PCと喋る方が落ち着く民」とは永遠に分かり合えません。",
+      "emoji_or_icon": "🍻"
+    },
+    {
+      "code": "comm_disorder_tech",
+      "display_name": "コミュ障を技術力でカバーするしかない奴",
+      "roast": "雑談は地獄、仕様書は天国。人と話すより回路と話す方が早いと本気で思っている。",
+      "love_followup": "でもその一点突破力、世界を裏で動かしてる。語らずとも結果が喋る。",
+      "worst_match": "loud_sales",
+      "worst_match_line": "「とりあえず飲みに行こ！」の民とは住む世界が違います。",
+      "emoji_or_icon": "🔬"
+    },
+    {
+      "code": "money_machine",
+      "display_name": "命を削って札束を刷るマシーン",
+      "roast": "時給換算は禁止カード。年収は高いが心拍数も高い。休みの定義を忘れた高機能アンドロイド。",
+      "love_followup": "でもその覚悟、本物。リターンを取りに行ける胆力は誰にでも持てるものじゃない。",
+      "worst_match": "clock_out_ghost",
+      "worst_match_line": "「定時で消える霊」とは人生のコスパ観が噛み合いません。",
+      "emoji_or_icon": "💴"
+    },
+    {
+      "code": "clock_out_ghost",
+      "display_name": "コスパ極めた定時退散かつ霊",
+      "roast": "18時に存在が消える。残業の気配を察知して退避する能力だけは天才的。波風立てず生き残る。",
+      "love_followup": "でもその安定感、組織の生命線。長く回り続ける仕組みはあなたみたいな人が支えてる。",
+      "worst_match": "money_machine",
+      "worst_match_line": "「命削って札束刷るマシーン」とは休日の過ごし方で確実に揉めます。",
+      "emoji_or_icon": "🕰️"
+    },
+    {
+      "code": "world_class_hidden",
+      "display_name": "世界が知らんとこで世界一握ってる人",
+      "roast": "名刺を出しても「何の会社？」と聞き返される。でも我が社の部品が無いと世界が止まる。黒子の帝王。",
+      "love_followup": "でもその静かな世界一、最強に渋い。派手さより本質を選べる目を持ってる。",
+      "worst_match": "loud_sales",
+      "worst_match_line": "「目立ってナンボ」の民とは、評価されたいベクトルが真逆です。",
+      "emoji_or_icon": "🌏"
+    }
+  ]
+}
