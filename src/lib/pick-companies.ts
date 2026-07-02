@@ -9,7 +9,7 @@
 // ============================================================
 
 import type { CompanyFilter } from "@/lib/diagnosis-core";
-import type { Company } from "@/lib/types";
+import type { Company, CompanyTag } from "@/lib/types";
 import { getSupabase } from "@/lib/supabase";
 import { LOCAL_COMPANIES } from "@/lib/local-data";
 
@@ -45,21 +45,11 @@ const RELAX_ORDER: (keyof CompanyFilter)[] = [
   "scale_type",
 ];
 
-// 1社が1つのフィルタ条件を満たすか。
-// location_type の "regional" は「地方もOK＝制限なし（都市も地方も可）」という
-// 仕様の意図（地方を“解禁”する）に合わせ、常に true 扱いにする。
-function matchesOne(company: Company, key: keyof CompanyFilter, value: string): boolean {
-  if (key === "location_type" && value === "regional") return true;
-  return (company as unknown as Record<string, unknown>)[key] === value;
-}
-
+// CompanyFilter のキーは全て Company の同名カラムに対応するので、素の等値比較で判定できる。
 function applyFilters(rows: Weighted[], filters: CompanyFilter): Weighted[] {
   const keys = Object.keys(filters) as (keyof CompanyFilter)[];
   return rows.filter((r) =>
-    keys.every((k) => {
-      const v = filters[k];
-      return v === undefined || matchesOne(r.company, k, v);
-    })
+    keys.every((k) => filters[k] === undefined || r.company[k] === filters[k])
   );
 }
 
@@ -116,13 +106,11 @@ async function pickFromSupabase(
 
   if (error || !data) return null;
 
-  const pool: Weighted[] = data.map((row: Record<string, unknown>) => {
-    const tags = (row.company_tags as { type_code: string; weight: number }[]) ?? [];
-    const tag = tags.find((t) => t.type_code === typeCode);
-    const { company_tags: _omit, ...company } = row;
-    void _omit;
-    return { company: company as unknown as Company, weight: tag?.weight ?? 1 };
-  });
+  const rows = data as (Company & { company_tags: CompanyTag[] })[];
+  const pool: Weighted[] = rows.map(({ company_tags, ...company }) => ({
+    company,
+    weight: company_tags.find((t) => t.type_code === typeCode)?.weight ?? 1,
+  }));
 
   return selectWithRelax(pool, filters, WANT, rng);
 }
@@ -150,6 +138,14 @@ export async function pickCompanies(
   filters: CompanyFilter,
   seed?: string
 ): Promise<PickResult> {
+  // q7「地方もOK」(regional) は「地方を解禁＝所在地の制約なし」の意味なので、
+  // ここで正規化してフィルタから外す。以降のマッチャーは素の等値比較のまま。
+  if (filters.location_type === "regional") {
+    const { location_type: _drop, ...rest } = filters;
+    void _drop;
+    filters = rest;
+  }
+
   const rng = seed ? makeRng(`${typeCode}:${seed}`) : Math.random;
   const fromDb = await pickFromSupabase(typeCode, filters, rng);
   if (fromDb !== null) {

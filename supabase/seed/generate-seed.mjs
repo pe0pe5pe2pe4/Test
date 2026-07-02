@@ -63,14 +63,13 @@ const q = (v) => {
   console.log(`Wrote ${typesOut} (${types.length} types)`);
 }
 
-const { companies } = JSON.parse(await readFile(companiesPath, "utf8"));
-const outPath = companiesOut;
+const { companies, defaults } = JSON.parse(await readFile(companiesPath, "utf8"));
 
 const lines = [];
 lines.push("-- ============================================================");
 lines.push("-- 0003_seed_companies.sql  ※自動生成。手で編集せず companies.json を更新して再生成すること。");
 lines.push("-- グローバルニッチトップ100選ベースの初期20社（仕様書 section 5 第1層）。");
-lines.push("-- status は approved 投入（初期投入分は出典確認済み扱い）。source_origin = 'gnt100'。");
+lines.push(`-- status は ${defaults.status} 投入（初期投入分は出典確認済み扱い）。source_origin = '${defaults.source_origin}'。`);
 lines.push("-- ============================================================");
 lines.push("");
 
@@ -96,8 +95,8 @@ for (const c of companies) {
         q(c.scale_type),
         q(c.is_listed ?? true),
         q(c.location_type),
-        q("approved"),
-        q("gnt100"),
+        q(defaults.status),
+        q(defaults.source_origin),
         "now()",
       ].join(", ") +
       ")"
@@ -118,5 +117,5 @@ for (const c of companies) {
   lines.push("");
 }
 
-await writeFile(outPath, lines.join("\n"), "utf8");
-console.log(`Wrote ${outPath} (${companies.length} companies)`);
+await writeFile(companiesOut, lines.join("\n"), "utf8");
+console.log(`Wrote ${companiesOut} (${companies.length} companies)`);

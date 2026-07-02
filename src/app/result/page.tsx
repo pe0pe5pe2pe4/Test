@@ -2,20 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CompanyCard } from "@/components/CompanyCard";
 import { ShareButton } from "@/components/ShareButton";
+import { pillSecondary } from "@/components/ui";
+import { SITE_NAME } from "@/lib/brand";
 import { resolveResult } from "@/lib/resolve-result";
 import { getSiteUrl } from "@/lib/site-url";
 
 export const dynamic = "force-dynamic";
 
 type SearchParams = { a?: string };
-
-function buildOgParams(a: string, type: { display_name: string }, companyNames: string[]) {
-  const p = new URLSearchParams();
-  p.set("a", a);
-  p.set("t", type.display_name);
-  p.set("c", companyNames.join("｜"));
-  return p.toString();
-}
 
 export async function generateMetadata({
   searchParams,
@@ -27,12 +21,12 @@ export async function generateMetadata({
   if (!type) return { title: "診断結果" };
 
   const site = getSiteUrl();
-  const ogParams = buildOgParams(a, type, companies.map((c) => c.name));
-  const ogImage = `${site}/api/og?${ogParams}`;
+  // OG画像は回答文字列 a だけから決定的に再現できる（resolveResult が a をシードに使う）。
+  const ogImage = `${site}/api/og?a=${encodeURIComponent(a)}`;
   const title = `私は「${type.display_name}」でした`;
   const description = `刺さる知らない優良企業：${companies
     .map((c) => c.name)
-    .join("・")}｜知らない優良企業診断`;
+    .join("・")}｜${SITE_NAME}`;
 
   return {
     title,
@@ -72,7 +66,7 @@ export default async function ResultPage({
 
   const site = getSiteUrl();
   const shareUrl = a ? `${site}/result?a=${a}` : `${site}/`;
-  const shareText = `私は「${type.display_name}」でした。あなたに刺さる知らない優良企業診断 ${type.emoji_or_icon ?? ""}`;
+  const shareText = `私は「${type.display_name}」でした。あなたに刺さる${SITE_NAME} ${type.emoji_or_icon ?? ""}`;
 
   return (
     <main className="mx-auto max-w-xl px-6 py-12">
@@ -133,16 +127,10 @@ export default async function ResultPage({
       <section className="mt-12">
         <ShareButton shareUrl={shareUrl} text={shareText} />
         <div className="mt-4 flex gap-3">
-          <Link
-            href="/diagnosis"
-            className="flex-1 rounded-full border-2 border-ink/15 px-4 py-3 text-center text-sm font-bold text-ink/70 transition-colors hover:border-ink/30"
-          >
+          <Link href="/diagnosis" className={`flex-1 px-4 ${pillSecondary}`}>
             もう一回診断する
           </Link>
-          <Link
-            href="/"
-            className="flex-1 rounded-full border-2 border-ink/15 px-4 py-3 text-center text-sm font-bold text-ink/70 transition-colors hover:border-ink/30"
-          >
+          <Link href="/" className={`flex-1 px-4 ${pillSecondary}`}>
             トップへ
           </Link>
         </div>

@@ -1,14 +1,11 @@
 import type { Config } from "tailwindcss";
+import { COLORS } from "./src/lib/brand";
 
 const config: Config = {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
-      colors: {
-        ink: "#1a1a1a",
-        paper: "#faf8f4",
-        accent: "#ff5a36",
-      },
+      colors: { ...COLORS },
       fontFamily: {
         sans: [
           "system-ui",

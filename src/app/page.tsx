@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { SITE_NAME } from "@/lib/brand";
+import { pillPrimary } from "@/components/ui";
 
 export default function Home() {
   return (
@@ -7,7 +9,7 @@ export default function Home() {
         毒舌キャリア診断
       </p>
       <h1 className="text-3xl font-black leading-tight sm:text-4xl">
-        知らない優良企業診断
+        {SITE_NAME}
       </h1>
       <p className="mt-6 text-base leading-relaxed text-ink/70">
         毒舌な7つの質問に答えるだけ。
@@ -17,7 +19,7 @@ export default function Home() {
 
       <Link
         href="/diagnosis"
-        className="mt-10 inline-flex items-center justify-center rounded-full bg-ink px-10 py-4 text-lg font-bold text-paper shadow-lg transition-transform hover:scale-[1.03] active:scale-95"
+        className={`mt-10 inline-flex items-center justify-center px-10 py-4 text-lg ${pillPrimary}`}
       >
         診断スタート（約30秒）
       </Link>

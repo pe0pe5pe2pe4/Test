@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { COLORS, SITE_NAME, formatSalary } from "@/lib/brand";
 import { resolveResult } from "@/lib/resolve-result";
 
 // 仕様書 section 7「シェア画像（バズの起爆装置）」。
@@ -39,13 +40,13 @@ export async function GET(req: Request) {
   const { type, companies } = await resolveResult(a);
 
   const clamp = (s: string, n: number) => (s.length > n ? s.slice(0, n - 1) + "…" : s);
-  const typeName = type?.display_name ?? "知らない優良企業診断";
+  const typeName = type?.display_name ?? SITE_NAME;
   const roast = clamp(type?.roast ?? "毒舌診断で、知らない優良企業に出会おう。", 40);
   const emoji = type?.emoji_or_icon ?? "🏢";
   const top = companies[0];
   const companyLine = top
     ? top.avg_salary != null
-      ? `${top.name}（平均年収 約${top.avg_salary.toLocaleString()}万円）`
+      ? `${top.name}（平均年収 ${formatSalary(top.avg_salary)}）`
       : top.name
     : "";
   const otherNames = companies.slice(1).map((c) => c.name).join("・");
@@ -60,14 +61,14 @@ export async function GET(req: Request) {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          backgroundColor: "#1a1a1a",
-          color: "#faf8f4",
+          backgroundColor: COLORS.ink,
+          color: COLORS.paper,
           padding: "64px 72px",
           fontFamily: font ? "NotoJP" : "sans-serif",
         }}
       >
-        <div style={{ display: "flex", fontSize: 28, color: "#ff5a36", fontWeight: 700 }}>
-          知らない優良企業診断
+        <div style={{ display: "flex", fontSize: 28, color: COLORS.accent, fontWeight: 700 }}>
+          {SITE_NAME}
         </div>
 
         <div style={{ display: "flex", alignItems: "center", marginTop: 28 }}>
@@ -76,7 +77,7 @@ export async function GET(req: Request) {
             style={{
               display: "flex",
               fontSize: 30,
-              color: "#faf8f4",
+              color: COLORS.paper,
               opacity: 0.7,
             }}
           >
@@ -101,7 +102,7 @@ export async function GET(req: Request) {
             display: "flex",
             fontSize: 26,
             lineHeight: 1.45,
-            color: "#faf8f4",
+            color: COLORS.paper,
             opacity: 0.8,
             marginTop: 18,
             maxWidth: 1056,
@@ -111,7 +112,7 @@ export async function GET(req: Request) {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", marginTop: "auto" }}>
-          <div style={{ display: "flex", fontSize: 24, color: "#ff5a36", fontWeight: 700 }}>
+          <div style={{ display: "flex", fontSize: 24, color: COLORS.accent, fontWeight: 700 }}>
             あなたに刺さる知らない優良企業
           </div>
           {companyLine && (

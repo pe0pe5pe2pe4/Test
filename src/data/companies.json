@@ -1,5 +1,9 @@
 {
-  "_note": "グローバルニッチトップ100選ベースの初期20社。仕様書 section 5 の第1層（初期投入）相当。数値・出典は再検証前のサンプル値であり、本番では承認フロー（Step 8）で出典を確認してから status を approved にする運用を想定。source_origin は全て gnt100。",
+  "_note": "グローバルニッチトップ100選ベースの初期20社。仕様書 section 5 の第1層（初期投入）相当。数値・出典は再検証前のサンプル値であり、本番では承認フロー（Step 8）で出典を確認してから status を approved にする運用を想定。defaults は初期投入分の共通ポリシーで、ローカルフォールバック（local-data.ts）と投入SQL生成（generate-seed.mjs）の両方が参照する。",
+  "defaults": {
+    "status": "approved",
+    "source_origin": "gnt100"
+  },
   "companies": [
     {
       "name": "レーザーテック",

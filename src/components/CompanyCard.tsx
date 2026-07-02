@@ -1,4 +1,5 @@
 import type { Company } from "@/lib/types";
+import { formatSalary } from "@/lib/brand";
 
 // 企業カード（結果画面の主役）。
 // 仕様の鉄則: 数字には必ず出典リンクを添える（出典なしは表示しない）。
@@ -28,7 +29,7 @@ export function CompanyCard({ company, rank }: { company: Company; rank: number 
           <p className="mt-1 text-sm font-semibold leading-snug">
             {company.share_highlight}
           </p>
-          <SourceLink href={company.share_source} label="出典" />
+          <SourceLink href={company.share_source} />
         </div>
 
         <div className="rounded-xl bg-paper p-3">
@@ -36,11 +37,9 @@ export function CompanyCard({ company, rank }: { company: Company; rank: number 
           {company.avg_salary != null ? (
             <>
               <p className="mt-1 text-sm font-semibold">
-                約 {company.avg_salary.toLocaleString()} 万円
+                {formatSalary(company.avg_salary)}
               </p>
-              {company.salary_source && (
-                <SourceLink href={company.salary_source} label="出典" />
-              )}
+              {company.salary_source && <SourceLink href={company.salary_source} />}
             </>
           ) : (
             <p className="mt-1 text-sm text-ink/40">非公開</p>
@@ -51,7 +50,7 @@ export function CompanyCard({ company, rank }: { company: Company; rank: number 
   );
 }
 
-function SourceLink({ href, label }: { href: string; label: string }) {
+function SourceLink({ href }: { href: string }) {
   return (
     <a
       href={href}
@@ -59,7 +58,7 @@ function SourceLink({ href, label }: { href: string; label: string }) {
       rel="noopener noreferrer"
       className="mt-1 inline-block text-xs font-semibold text-accent underline underline-offset-2"
     >
-      {label} ↗
+      出典 ↗
     </a>
   );
 }
