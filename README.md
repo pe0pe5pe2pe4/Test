@@ -6,18 +6,19 @@
 > このアプリの核：**主役は企業との出会い**。毒舌タイプは入口（バズの装置）。
 > 年収・シェアの数字は**必ず出典付き**で、出典のないデータはDBに入れない。
 
-## 実装済み（Step 1〜5）
+## 実装済み（Step 1〜8 ＋ デプロイ手順）
 
 | Step | 内容 | 場所 |
 |------|------|------|
-| 1 | Supabaseスキーマ（companies / company_tags / types / user_submissions）＋ 毒舌タイプ5種の初期投入 | `supabase/migrations/` |
-| 2 | グローバルニッチトップ100選ベースの初期20社を投入 | `src/data/companies.json` → `supabase/seed/0003_seed_companies.sql` |
+| 1 | Supabaseスキーマ（companies / company_tags / types / user_submissions）＋ 毒舌タイプ5種 ＋ RLS | `supabase/migrations/` |
+| 2 | グローバルニッチトップ100選ベースの初期20社（年収は有報ベースで裏取り済み・出典付き） | `src/data/companies.json` → `supabase/seed/0003_seed_companies.sql` |
 | 3 | 診断フロント（質問7問 → スコアリング → タイプ判定 → 企業3社抽出） | `src/app/diagnosis/`, `src/lib/` |
 | 4 | 結果画面（毒舌タイプ表示・自虐・愛のフォロー・企業カード・相性最悪タイプ煽り） | `src/app/result/`, `src/components/` |
 | 5 | シェア画像（動的OGP / `next/og`） | `src/app/api/og/route.tsx` |
-
-Step 6〜9（ユーザー投稿フォーム・AI自動収集バッチ・承認画面・Vercelデプロイ）はMVP対象外で未実装。
-スキーマ（`user_submissions` 等）は将来の Step 6〜8 を見越して用意済み。
+| 6 | ユーザー投稿フォーム（「この会社を推す」→ user_submissions） | `src/app/submit/`, `src/app/api/submissions/` |
+| 7 | AI自動収集バッチ（Claude API ＋ 出典フィルタ → pending投入） | `supabase/functions/collect-companies/` |
+| 8 | 承認画面（出典リンク確認 → ワンクリック承認/却下） | `src/app/admin/`, `src/app/api/admin/` |
+| 9 | デプロイ手順（Supabase → Vercel → cron） | `DEPLOY.md` |
 
 ## 技術スタック（仕様書 section 2）
 
@@ -70,8 +71,9 @@ node supabase/seed/generate-seed.mjs
 
 これによりアプリのフォールバックデータとDB投入SQLが常に一致する。
 
-> 初期20社の年収・シェアは出典URL（各社IR等）付きのサンプル値。
-> 本番運用では Step 8 の承認フローで出典を確認してから `approved` にする想定。
+> 初期20社の平均年収は有価証券報告書ベースの数値（日経 会社情報の給与ページで確認、
+> `salary_source` がその出典）。シェアの記述は各社公式サイトに基づく。
+> AI収集分・ユーザー投稿分は Step 8 の承認フローで出典確認後に `approved` にする。
 
 ## 診断ロジック（仕様書 section 4 / `diagnosis-core.ts`）
 
@@ -98,7 +100,11 @@ src/
     page.tsx              トップ（診断スタート）
     diagnosis/page.tsx    質問7問（クライアント）
     result/page.tsx       結果画面（サーバ／OGPメタデータ生成）
+    submit/page.tsx       ユーザー投稿フォーム（Step 6）
+    admin/page.tsx        承認画面（Step 8, ADMIN_TOKEN保護）
     api/og/route.tsx      シェア画像（動的OGP）
+    api/submissions/      投稿受付API
+    api/admin/decide/     承認/却下API（service role）
   components/
     CompanyCard.tsx       企業カード（出典リンク付き）
     ShareButton.tsx       Xシェア／リンクコピー
@@ -115,6 +121,10 @@ src/
     companies.json        初期20社（単一ソース）
     types.json            毒舌タイプ5種（単一ソース）
 supabase/
-  migrations/             スキーマ＋タイプ投入SQL
+  migrations/             スキーマ＋タイプ投入＋RLS
   seed/                   企業投入SQL＋ジェネレーター
+  functions/
+    collect-companies/    AI自動収集バッチ（Edge Function, Step 7）
 ```
+
+デプロイは `DEPLOY.md` を参照。

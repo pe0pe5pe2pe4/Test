@@ -134,6 +134,12 @@ export default async function ResultPage({
             トップへ
           </Link>
         </div>
+        <p className="mt-6 text-center text-sm text-ink/60">
+          知られてないけど凄い会社、知ってる？{" "}
+          <Link href="/submit" className="font-bold text-accent underline underline-offset-2">
+            この会社を推す
+          </Link>
+        </p>
       </section>
 
       <p className="mt-10 text-center text-[11px] leading-relaxed text-ink/40">

@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Seed SQL is in sync with src/data JSON
+        run: |
+          node supabase/seed/generate-seed.mjs
+          git diff --exit-code supabase/ \
+            || (echo "::error::seed SQL が src/data/*.json と乖離しています。generate-seed.mjs を実行してコミットしてください" && exit 1)
+
+      - name: Build
+        run: npm run build
