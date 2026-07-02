@@ -1,0 +1,385 @@
+{
+  "_note": "グローバルニッチトップ100選ベースの初期20社。仕様書 section 5 の第1層（初期投入）相当。数値・出典は再検証前のサンプル値であり、本番では承認フロー（Step 8）で出典を確認してから status を approved にする運用を想定。defaults は初期投入分の共通ポリシーで、ローカルフォールバック（local-data.ts）と投入SQL生成（generate-seed.mjs）の両方が参照する。",
+  "defaults": {
+    "status": "approved",
+    "source_origin": "gnt100"
+  },
+  "companies": [
+    {
+      "name": "レーザーテック",
+      "familiar_hook": "あなたのスマホの頭脳（半導体）を作る、最先端工場のさらに裏方",
+      "share_highlight": "EUV用フォトマスク欠陥検査装置で世界シェアほぼ100%",
+      "share_source": "https://www.lasertec.co.jp/",
+      "avg_salary": 1200,
+      "salary_source": "https://www.lasertec.co.jp/ir/",
+      "one_liner": "世界の最先端半導体は、この会社の検査を通らないと出荷できない",
+      "product_field": "electronics",
+      "visibility": "product",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "urban",
+      "tags": [
+        { "type_code": "money_machine", "weight": 3 },
+        { "type_code": "comm_disorder_tech", "weight": 2 },
+        { "type_code": "world_class_hidden", "weight": 2 }
+      ]
+    },
+    {
+      "name": "ディスコ",
+      "familiar_hook": "スマホの中のチップ、その「切る・削る・磨く」をほぼ全部担当",
+      "share_highlight": "半導体精密加工装置（ダイサー・グラインダ）で世界シェア7〜8割",
+      "share_source": "https://www.disco.co.jp/",
+      "avg_salary": 1300,
+      "salary_source": "https://www.disco.co.jp/jp/ir/",
+      "one_liner": "稼ぐ力も給与もエグい、半導体の裏方ガチ勢",
+      "product_field": "electronics",
+      "visibility": "product",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "urban",
+      "tags": [
+        { "type_code": "money_machine", "weight": 3 },
+        { "type_code": "world_class_hidden", "weight": 2 },
+        { "type_code": "comm_disorder_tech", "weight": 1 }
+      ]
+    },
+    {
+      "name": "浜松ホトニクス",
+      "familiar_hook": "ノーベル賞のカミオカンデの「目」を作った会社",
+      "share_highlight": "光電子増倍管で世界シェア約9割",
+      "share_source": "https://www.hamamatsu.com/jp/ja.html",
+      "avg_salary": 820,
+      "salary_source": "https://www.hamamatsu.com/jp/ja/our-company/ir.html",
+      "one_liner": "光を究めて世界の科学を裏で支える、静岡の世界企業",
+      "product_field": "electronics",
+      "visibility": "component",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "regional",
+      "tags": [
+        { "type_code": "comm_disorder_tech", "weight": 3 },
+        { "type_code": "world_class_hidden", "weight": 3 }
+      ]
+    },
+    {
+      "name": "ナブテスコ",
+      "familiar_hook": "工場のロボットアームの「関節」、あと電車のドアやブレーキ",
+      "share_highlight": "産業用ロボット向け精密減速機で世界シェア約6割",
+      "share_source": "https://www.nabtesco.com/",
+      "avg_salary": 760,
+      "salary_source": "https://www.nabtesco.com/ir/",
+      "one_liner": "世界中のロボットの関節、その60%はこの会社の中身",
+      "product_field": "machine",
+      "visibility": "component",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "urban",
+      "tags": [
+        { "type_code": "world_class_hidden", "weight": 3 },
+        { "type_code": "comm_disorder_tech", "weight": 2 },
+        { "type_code": "clock_out_ghost", "weight": 1 }
+      ]
+    },
+    {
+      "name": "SMC",
+      "familiar_hook": "世界中の工場の自動化ラインを動かす「空気の力」担当",
+      "share_highlight": "空気圧制御機器で世界シェア約3割超、世界首位",
+      "share_source": "https://www.smcworld.com/",
+      "avg_salary": 900,
+      "salary_source": "https://www.smcworld.com/ir/ja-jp/",
+      "one_liner": "知名度ゼロなのに高収益、工場自動化の影の世界王者",
+      "product_field": "machine",
+      "visibility": "component",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "urban",
+      "tags": [
+        { "type_code": "world_class_hidden", "weight": 3 },
+        { "type_code": "money_machine", "weight": 2 },
+        { "type_code": "comm_disorder_tech", "weight": 1 },
+        { "type_code": "loud_sales", "weight": 1 }
+      ]
+    },
+    {
+      "name": "信越化学工業",
+      "familiar_hook": "世界の半導体の「土台（シリコンウェハ）」シェア世界一",
+      "share_highlight": "半導体シリコンウェハ・塩化ビニル樹脂でいずれも世界首位",
+      "share_source": "https://www.shinetsu.co.jp/jp/",
+      "avg_salary": 920,
+      "salary_source": "https://www.shinetsu.co.jp/jp/ir/",
+      "one_liner": "派手さゼロ、利益は化け物。日本一の堅実な世界企業",
+      "product_field": "material",
+      "visibility": "component",
+      "scale_type": "stable",
+      "is_listed": true,
+      "location_type": "urban",
+      "tags": [
+        { "type_code": "clock_out_ghost", "weight": 2 },
+        { "type_code": "world_class_hidden", "weight": 3 },
+        { "type_code": "money_machine", "weight": 1 }
+      ]
+    },
+    {
+      "name": "村田製作所",
+      "familiar_hook": "あなたのスマホに千個入ってる極小部品の世界王者",
+      "share_highlight": "積層セラミックコンデンサ（MLCC）で世界シェア約4割",
+      "share_source": "https://www.murata.com/ja-jp",
+      "avg_salary": 760,
+      "salary_source": "https://corporate.murata.com/ja-jp/ir",
+      "one_liner": "京都発、スマホ1台に千個入る部品の世界トップ",
+      "product_field": "electronics",
+      "visibility": "component",
+      "scale_type": "stable",
+      "is_listed": true,
+      "location_type": "urban",
+      "tags": [
+        { "type_code": "world_class_hidden", "weight": 2 },
+        { "type_code": "clock_out_ghost", "weight": 2 },
+        { "type_code": "comm_disorder_tech", "weight": 1 },
+        { "type_code": "loud_sales", "weight": 1 }
+      ]
+    },
+    {
+      "name": "ミネベアミツミ",
+      "familiar_hook": "家電からジェット機まで、回るものの中心はだいたいコレ",
+      "share_highlight": "超精密ミニチュアボールベアリングで世界シェア約6割",
+      "share_source": "https://www.minebeamitsumi.com/",
+      "avg_salary": 660,
+      "salary_source": "https://www.minebeamitsumi.com/ir/",
+      "one_liner": "1ミリの世界で世界一、回転部品の絶対王者",
+      "product_field": "machine",
+      "visibility": "component",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "urban",
+      "tags": [
+        { "type_code": "world_class_hidden", "weight": 3 },
+        { "type_code": "clock_out_ghost", "weight": 1 }
+      ]
+    },
+    {
+      "name": "THK",
+      "familiar_hook": "ロボットや工作機械が「まっすぐ滑らかに動く」のはこの部品のおかげ",
+      "share_highlight": "直動案内機器（LMガイド）を世界で初めて開発、世界シェア首位級",
+      "share_source": "https://www.thk.com/",
+      "avg_salary": 720,
+      "salary_source": "https://www.thk.com/?q=ja/ir",
+      "one_liner": "「まっすぐ動く」を発明した会社、世界の機械の縁の下",
+      "product_field": "machine",
+      "visibility": "component",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "urban",
+      "tags": [
+        { "type_code": "world_class_hidden", "weight": 3 },
+        { "type_code": "comm_disorder_tech", "weight": 1 }
+      ]
+    },
+    {
+      "name": "ハーモニック・ドライブ・システムズ",
+      "familiar_hook": "火星探査機からヒト型ロボまで、精密な「関節」の心臓部",
+      "share_highlight": "波動歯車装置（精密減速機）で世界シェア首位級",
+      "share_source": "https://www.hds.co.jp/",
+      "avg_salary": 700,
+      "salary_source": "https://www.hds.co.jp/ir/",
+      "one_liner": "宇宙とロボットの関節を握る、究極のニッチトップ",
+      "product_field": "machine",
+      "visibility": "component",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "regional",
+      "tags": [
+        { "type_code": "comm_disorder_tech", "weight": 3 },
+        { "type_code": "world_class_hidden", "weight": 3 }
+      ]
+    },
+    {
+      "name": "堀場製作所",
+      "familiar_hook": "世界中の新車が必ず通る「排ガス検査」の装置はだいたいココ",
+      "share_highlight": "自動車エンジン排ガス測定装置で世界シェア約8割",
+      "share_source": "https://www.horiba.com/jpn/",
+      "avg_salary": 770,
+      "salary_source": "https://www.horiba.com/jpn/investor-relations/",
+      "one_liner": "「おもしろおかしく」を社是にする京都の世界計測企業",
+      "product_field": "car",
+      "visibility": "product",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "urban",
+      "tags": [
+        { "type_code": "world_class_hidden", "weight": 3 },
+        { "type_code": "comm_disorder_tech", "weight": 2 },
+        { "type_code": "money_machine", "weight": 1 },
+        { "type_code": "loud_sales", "weight": 1 }
+      ]
+    },
+    {
+      "name": "ニデック",
+      "familiar_hook": "PCやデータセンターの中で静かに回り続ける小型モーターの王者",
+      "share_highlight": "精密小型モーター（HDD用スピンドル等）で世界シェア圧倒的首位",
+      "share_source": "https://www.nidec.com/jp/",
+      "avg_salary": 800,
+      "salary_source": "https://www.nidec.com/jp/ir/",
+      "one_liner": "「すぐやる、必ずやる、出来るまでやる」で世界一になった会社",
+      "product_field": "electronics",
+      "visibility": "component",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "urban",
+      "tags": [
+        { "type_code": "world_class_hidden", "weight": 2 },
+        { "type_code": "money_machine", "weight": 2 },
+        { "type_code": "loud_sales", "weight": 2 }
+      ]
+    },
+    {
+      "name": "マニー",
+      "familiar_hook": "あなたの体を縫った針、世界の歯医者のヤスリ、実は栃木の会社",
+      "share_highlight": "手術用縫合針・歯科用ファイルで世界シェア上位",
+      "share_source": "https://www.mani.co.jp/",
+      "avg_salary": 610,
+      "salary_source": "https://www.mani.co.jp/ir/",
+      "one_liner": "「世界一の品質」だけを追う、医療ニッチの職人企業",
+      "product_field": "medical",
+      "visibility": "product",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "regional",
+      "tags": [
+        { "type_code": "world_class_hidden", "weight": 3 },
+        { "type_code": "comm_disorder_tech", "weight": 1 },
+        { "type_code": "clock_out_ghost", "weight": 1 }
+      ]
+    },
+    {
+      "name": "椿本チエイン",
+      "familiar_hook": "工場の搬送ラインや車のエンジンの中で力を伝える「鎖」",
+      "share_highlight": "産業用スチールチェーンで世界シェア上位",
+      "share_source": "https://www.tsubakimoto.jp/",
+      "avg_salary": 720,
+      "salary_source": "https://www.tsubakimoto.jp/ir/",
+      "one_liner": "100年以上ずっと回り続ける、チェーンの老舗世界企業",
+      "product_field": "machine",
+      "visibility": "component",
+      "scale_type": "stable",
+      "is_listed": true,
+      "location_type": "urban",
+      "tags": [
+        { "type_code": "clock_out_ghost", "weight": 2 },
+        { "type_code": "world_class_hidden", "weight": 2 }
+      ]
+    },
+    {
+      "name": "日本ガイシ",
+      "familiar_hook": "世界中の車の排気を綺麗にするセラミックの蜂の巣はココ",
+      "share_highlight": "自動車排ガス浄化用セラミックスで世界シェア首位級",
+      "share_source": "https://www.ngk.co.jp/",
+      "avg_salary": 810,
+      "salary_source": "https://www.ngk.co.jp/ir/",
+      "one_liner": "セラミックで地球の空気を守る、名古屋の堅実世界企業",
+      "product_field": "material",
+      "visibility": "component",
+      "scale_type": "stable",
+      "is_listed": true,
+      "location_type": "regional",
+      "tags": [
+        { "type_code": "clock_out_ghost", "weight": 2 },
+        { "type_code": "world_class_hidden", "weight": 2 },
+        { "type_code": "comm_disorder_tech", "weight": 1 }
+      ]
+    },
+    {
+      "name": "不二製油グループ本社",
+      "familiar_hook": "コンビニスイーツやお菓子のチョコ、裏で支える「油脂の会社」",
+      "share_highlight": "業務用チョコレート・植物性油脂で世界的シェア",
+      "share_source": "https://www.fujioilholdings.com/",
+      "avg_salary": 760,
+      "salary_source": "https://www.fujioilholdings.com/ir/",
+      "one_liner": "あなたが今日食べたチョコの裏に、たぶんこの会社",
+      "product_field": "food",
+      "visibility": "component",
+      "scale_type": "stable",
+      "is_listed": true,
+      "location_type": "urban",
+      "tags": [
+        { "type_code": "clock_out_ghost", "weight": 2 },
+        { "type_code": "world_class_hidden", "weight": 1 },
+        { "type_code": "loud_sales", "weight": 1 }
+      ]
+    },
+    {
+      "name": "ローツェ",
+      "familiar_hook": "半導体工場で、繊細なウェハを傷つけず運ぶロボットの専門家",
+      "share_highlight": "半導体ウェハ搬送ロボット・装置で世界シェア上位",
+      "share_source": "https://www.rorze.com/",
+      "avg_salary": 700,
+      "salary_source": "https://www.rorze.com/ir/",
+      "one_liner": "広島発、半導体工場の「運ぶ」を独占する技術集団",
+      "product_field": "electronics",
+      "visibility": "product",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "regional",
+      "tags": [
+        { "type_code": "comm_disorder_tech", "weight": 2 },
+        { "type_code": "world_class_hidden", "weight": 2 },
+        { "type_code": "money_machine", "weight": 1 }
+      ]
+    },
+    {
+      "name": "ユーシン精機",
+      "familiar_hook": "ペットボトルのキャップや弁当容器を量産する裏方ロボット",
+      "share_highlight": "プラスチック成形品取出ロボットで世界シェア首位級",
+      "share_source": "https://www.yushin.com/",
+      "avg_salary": 650,
+      "salary_source": "https://www.yushin.com/ja/ir/",
+      "one_liner": "身の回りの樹脂製品、その量産を支える京都のロボット屋",
+      "product_field": "machine",
+      "visibility": "product",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "regional",
+      "tags": [
+        { "type_code": "world_class_hidden", "weight": 3 },
+        { "type_code": "clock_out_ghost", "weight": 1 }
+      ]
+    },
+    {
+      "name": "メック",
+      "familiar_hook": "スマホ基板の「くっつき」を陰で保証する薬品メーカー",
+      "share_highlight": "プリント基板用の密着向上表面処理薬品で世界的シェア",
+      "share_source": "https://www.mec-co.com/",
+      "avg_salary": 700,
+      "salary_source": "https://www.mec-co.com/ir/",
+      "one_liner": "電子機器の信頼性を、目に見えない化学で支える兵庫の会社",
+      "product_field": "material",
+      "visibility": "component",
+      "scale_type": "niche_top",
+      "is_listed": true,
+      "location_type": "regional",
+      "tags": [
+        { "type_code": "comm_disorder_tech", "weight": 2 },
+        { "type_code": "world_class_hidden", "weight": 2 }
+      ]
+    },
+    {
+      "name": "島津製作所",
+      "familiar_hook": "病院の検査や食品の安全を支える分析装置、ノーベル賞も出た会社",
+      "share_highlight": "液体クロマトグラフ等の分析計測機器でグローバル上位",
+      "share_source": "https://www.shimadzu.co.jp/",
+      "avg_salary": 850,
+      "salary_source": "https://www.shimadzu.co.jp/ir/",
+      "one_liner": "ノーベル賞研究者を生んだ、京都の老舗分析機器メーカー",
+      "product_field": "medical",
+      "visibility": "product",
+      "scale_type": "stable",
+      "is_listed": true,
+      "location_type": "urban",
+      "tags": [
+        { "type_code": "comm_disorder_tech", "weight": 3 },
+        { "type_code": "world_class_hidden", "weight": 2 },
+        { "type_code": "clock_out_ghost", "weight": 1 }
+      ]
+    }
+  ]
+}
